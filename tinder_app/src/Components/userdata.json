@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "jess",
+      "age": 22,
+      "image": "https://joeschmoe.io/api/v1/jess",
+      "self_introduction": "Ipsam eos repellat consequatur quo aut."
+    },
+    {
+      "id": "2",
+      "name": "jon",
+      "age": 25,
+      "image": "https://joeschmoe.io/api/v1/jon",
+      "self_introduction": "Hic aspernatur error consequatur quam similique explicabo molestiae quae laborum."
+    },
+    {
+      "id": "3",
+      "name": "julie",
+      "age": 18,
+      "image": "https://joeschmoe.io/api/v1/julie",
+      "self_introduction": "Accusantium architecto distinctio aut quo pariatur eveniet omnis aut quod."
+    },
+    {
+      "id": "4",
+      "name": "jia",
+      "age": 27,
+      "image": "https://joeschmoe.io/api/v1/jia",
+      "self_introduction": "Deleniti alias culpa reprehenderit."
+    },
+    {
+      "id": "5",
+      "name": "jazebelle",
+      "age": 23,
+      "image": "https://joeschmoe.io/api/v1/jazebelle",
+      "self_introduction": "Repellendus eveniet qui optio."
+    }
+  ]
+}

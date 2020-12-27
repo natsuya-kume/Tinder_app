@@ -1,48 +1,21 @@
 import React, { useState, useMemo } from "react";
-// import TinderCard from '../react-tinder-card/index'
 import TinderCard from "react-tinder-card";
-import prof from "../images/bg.png";
-
-// カードのデータ
-const db = [
-  {
-    name: "Richard Hendricks",
-    url: "./img/erlich.jpg",
-  },
-  {
-    name: "Erlich Bachman",
-    url: "./img/erlich.jpg",
-  },
-  {
-    name: "Monica Hall",
-    url: "./img/monica.jpg",
-  },
-  {
-    name: "Jared Dunn",
-    url: "./img/jared.jpg",
-  },
-  {
-    name: "Natsuya",
-    age: "21歳",
-    url: "./img/jared.jpg",
-  },
-];
+import db from "./userdata.json";
 
 // 既にスワイプしたカードをいれる配列
 const alreadySwiped = [];
-
-let charactersState = db; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
+let charactersState = db.users; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
 
 const Card = () => {
   // 初期値characters
-  const [characters, setCharacters] = useState(db);
+  const [characters, setCharacters] = useState(db.users);
   // 最後にスワイプした方向
   const [lastDirection, setLastDirection] = useState();
 
   // 引数に作成よう関数とそれが依存する配列を渡す
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(db.users.length)
         .fill(0)
         .map((i) => React.createRef()),
     []
@@ -78,7 +51,7 @@ const Card = () => {
 
     if (cardsLeft.length) {
       const toBeRemoved = cardsLeft[cardsLeft.length - 1].name; // Find the card object to be removed
-      const index = db.map((person) => person.name).indexOf(toBeRemoved); // Find the index of which to make the reference to
+      const index = db.users.map((person) => person.name).indexOf(toBeRemoved); // Find the index of which to make the reference to
       alreadySwiped.push(toBeRemoved); // Make sure the next card gets removed next time if this card do not have time to exit the screen
       childRefs[index].current.swipe(dir); // Swipe the card!
     }
@@ -105,7 +78,7 @@ const Card = () => {
             onCardLeftScreen={() => outOfFrame(character.name)}
           >
             <div
-              style={{ backgroundImage: "url(" + prof + ")" }}
+              style={{ backgroundImage: "url(" + character.image + ")" }}
               className="card"
             >
               <h3>{character.name}</h3>
@@ -114,7 +87,7 @@ const Card = () => {
           </TinderCard>
         ))}
         {/* 全てのカードが仕分けできた時 */}
-        {alreadySwiped.length >= db.length ? (
+        {alreadySwiped.length >= db.users.length ? (
           <div className="empty">
             <h3>empty!</h3>
           </div>
