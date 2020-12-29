@@ -71,19 +71,45 @@ h2 {
 /* .swipe:last-of-type {
 } */
 
-.card h3 {
-  position: absolute;
-  bottom: 0;
-  margin: 10px;
+.card p {
   color: #fff;
 }
 
-.card p {
+.prof_name {
+  font-weight: bold;
+}
+
+.prof_container {
+  opacity: 0.8;
+  background-color: grey;
   position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 10px;
-  color: #fff;
+  top: 200px;
+  border-radius: 20px;
+  width: 80vw;
+  max-width: 240px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.item_container {
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 240px;
+  border-radius: 20px;
+  width: 80vw;
+}
+
+.prof_text {
+  background-color: "snow";
+  max-width: 240px;
+  text-align: left;
+  width: 80vw;
+  height: 90px;
+  font-size: 10px;
+  font-weight: "bold";
 }
 
 .empty {

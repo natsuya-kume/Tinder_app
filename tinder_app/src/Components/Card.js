@@ -1,8 +1,35 @@
 import React, { useState, useMemo } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import TinderCard from "react-tinder-card";
+import clsx from "clsx";
+import CardContainer from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import IconButton from "@material-ui/core/IconButton";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Typography from "@material-ui/core/Typography";
+import Collapse from "@material-ui/core/Collapse";
+
+const useStyles = makeStyles((theme) => ({
+  expand: {
+    transform: "rotate(180deg)",
+    marginLeft: "auto",
+    color: "white",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: "rotate(0deg)",
+  },
+}));
 
 const alreadySwiped = []; // スワイプしたカードをいれる配列
 const Card = ({ userData }) => {
+  const classes = useStyles();
+  const [expanded, setExpanded] = useState(false);
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
   const [characters, setCharacters] = useState([]); // ユーザーデータを管理
   const [lastDirection, setLastDirection] = useState(); // スワイプ方向を管理
 
@@ -49,6 +76,10 @@ const Card = ({ userData }) => {
       const index = userData.map((person) => person.name).indexOf(toBeRemoved); // 削除するカードの名前をみて、インデックスを取得
       alreadySwiped.push(toBeRemoved); // Make sure the next card gets removed next time if this card do not have time to exit the screen
       childRefs[index].current.swipe(dir); //カードをスワイプする
+      // // プロフ詳細を開いたままスワイプした時
+      // if (expanded === true) {
+      //   setExpanded(!expanded);
+      // }
     }
   };
 
@@ -65,21 +96,48 @@ const Card = ({ userData }) => {
       <h1>Tinder_app</h1>
       <div className="cardContainer">
         {userData.map((character, index) => (
-          <TinderCard
-            ref={childRefs[index]}
-            className="swipe"
-            key={character.name}
-            onSwipe={(dir) => swiped(dir, character.name)}
-            onCardLeftScreen={() => outOfFrame(character.name)}
-          >
-            <div
-              style={{ backgroundImage: "url(" + character.image + ")" }}
-              className="card"
+          <CardContainer className={classes.root}>
+            <TinderCard
+              ref={childRefs[index]}
+              className="swipe"
+              key={character.name}
+              onSwipe={(dir) => swiped(dir, character.name)}
+              onCardLeftScreen={() => outOfFrame(character.name)}
             >
-              <h3>{character.name}</h3>
-              <p>{character.age}</p>
-            </div>
-          </TinderCard>
+              <div
+                style={{ backgroundImage: "url(" + character.image + ")" }}
+                className="card"
+              >
+                <Collapse
+                  in={expanded}
+                  timeout="auto"
+                  className="prof_container"
+                  unmountOnExit
+                >
+                  <Typography className="prof_text">
+                    {character.self_introduction}
+                  </Typography>
+                </Collapse>
+                <CardActions disableSpacing className="item_container">
+                  {expanded === false ? (
+                    <p className="prof_name">
+                      {character.name}, {character.age}
+                    </p>
+                  ) : null}
+                  <IconButton
+                    className={clsx(classes.expand, {
+                      [classes.expandOpen]: expanded,
+                    })}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                  >
+                    <ExpandMoreIcon />
+                  </IconButton>
+                </CardActions>
+              </div>
+            </TinderCard>
+          </CardContainer>
         ))}
         {/* 全てのカードが仕分けできた時 */}
         {alreadySwiped.length >= userData.length ? (
@@ -88,7 +146,6 @@ const Card = ({ userData }) => {
           </div>
         ) : null}
       </div>
-
       <div className="buttons">
         <button onClick={() => swipe("left")}>スキップ</button>
         <button onClick={() => swipe("right")}>いいね!</button>
@@ -96,7 +153,6 @@ const Card = ({ userData }) => {
       {lastDirection ? (
         <h2 key={lastDirection} className="infoText">
           You swiped {lastDirection}
-          {/* {lastDirection}しました！ */}
         </h2>
       ) : (
         <h2 className="infoText">Swipe the Card or Click Button!</h2>

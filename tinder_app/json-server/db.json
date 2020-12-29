@@ -19,21 +19,21 @@
       "name": "julie",
       "age": 18,
       "image": "https://joeschmoe.io/api/v1/julie",
-      "self_introduction": "Accusantium architecto distinctio aut quo pariatur eveniet omnis aut quod."
+      "self_introduction": "My name is julie. Nice to meet you!!"
     },
     {
       "id": "4",
       "name": "jia",
       "age": 27,
       "image": "https://joeschmoe.io/api/v1/jia",
-      "self_introduction": "Deleniti alias culpa reprehenderit."
+      "self_introduction": "I work at school.🏫 Feel free to talk to me!!"
     },
     {
       "id": "5",
       "name": "jazebelle",
       "age": 23,
       "image": "https://joeschmoe.io/api/v1/jazebelle",
-      "self_introduction": "Repellendus eveniet qui optio."
+      "self_introduction": "I am 23 years old!. My hobby is programming.🖥"
     }
   ]
 }
