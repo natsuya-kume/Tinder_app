@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const alreadySwiped = []; // スワイプしたカードをいれる配列
+const skip = []; // いいねしたカードをいれる配列
+const favorite = []; // スキップしたカードをいれる配列
 const Card = ({ userData }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -45,11 +47,17 @@ const Card = ({ userData }) => {
   );
 
   // カードがスワイプされる時の関数　引数はスワイプ方向と消すカードの名前
-  const swiped = (direction, nameToDelete) => {
+  const swiped = (direction, nameToDelete, deleteInfo) => {
     console.log(nameToDelete + "が消されました");
     if (direction === "left" || direction === "right") {
       setLastDirection(direction); // スワイプされた方向を格納;
       alreadySwiped.push(nameToDelete); // alreadySwipedにスワイプされた名前を代入;
+      if (direction === "left") {
+        skip.push(deleteInfo);
+      }
+      if (direction === "right") {
+        favorite.push(deleteInfo);
+      }
     }
   };
 
@@ -103,7 +111,7 @@ const Card = ({ userData }) => {
               ref={childRefs[index]}
               className="swipe"
               key={character.name}
-              onSwipe={(dir) => swiped(dir, character.name)}
+              onSwipe={(dir) => swiped(dir, character.name, character)}
               onCardLeftScreen={() => outOfFrame(character.name)}
               preventSwipe="up,down"
             >

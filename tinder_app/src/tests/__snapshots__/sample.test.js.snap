@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UI test 1`] = `
+<div
+  className="app"
+>
+  <div>
+    <link
+      href="https://fonts.googleapis.com/css?family=Damion&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
+      rel="stylesheet"
+    />
+    <h1>
+      Tinder_app
+    </h1>
+    <div
+      className="cardContainer"
+    >
+      <div
+        className="empty"
+      >
+        <h3>
+          empty!
+        </h3>
+      </div>
+    </div>
+    <div
+      className="buttons"
+    >
+      <button
+        onClick={[Function]}
+      >
+        スキップ
+      </button>
+      <button
+        onClick={[Function]}
+      >
+        いいね!
+      </button>
+    </div>
+    <h2
+      className="infoText"
+    >
+      Swipe the Card or Click Button!
+    </h2>
+  </div>
+</div>
+`;
