@@ -1,33 +1,12 @@
 import React, { useState, useMemo } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import TinderCard from "react-tinder-card";
-import clsx from "clsx";
 import CardContainer from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import IconButton from "@material-ui/core/IconButton";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Typography from "@material-ui/core/Typography";
-import Collapse from "@material-ui/core/Collapse";
-
-const useStyles = makeStyles((theme) => ({
-  expand: {
-    transform: "rotate(180deg)",
-    marginLeft: "auto",
-    color: "white",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(0deg)",
-  },
-}));
+import Profile from "./Profile";
 
 const alreadySwiped = []; // スワイプしたカードをいれる配列
 const skip = []; // いいねしたカードをいれる配列
 const favorite = []; // スキップしたカードをいれる配列
 const Card = ({ userData }) => {
-  const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -106,7 +85,7 @@ const Card = ({ userData }) => {
       <h1>Tinder_app</h1>
       <div className="cardContainer">
         {userData.map((character, index) => (
-          <CardContainer className={classes.root}>
+          <CardContainer>
             <TinderCard
               ref={childRefs[index]}
               className="swipe"
@@ -115,38 +94,11 @@ const Card = ({ userData }) => {
               onCardLeftScreen={() => outOfFrame(character.name)}
               preventSwipe="up,down"
             >
-              <div
-                style={{ backgroundImage: "url(" + character.image + ")" }}
-                className="card"
-              >
-                <Collapse
-                  in={expanded}
-                  timeout="auto"
-                  className="prof_container"
-                  unmountOnExit
-                >
-                  <Typography className="prof_text">
-                    {character.self_introduction}
-                  </Typography>
-                </Collapse>
-                <CardActions disableSpacing className="item_container">
-                  {expanded === false ? (
-                    <p className="prof_name">
-                      {character.name}, {character.age}
-                    </p>
-                  ) : null}
-                  <IconButton
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </IconButton>
-                </CardActions>
-              </div>
+              <Profile
+                expanded={expanded}
+                handleExpandClick={handleExpandClick}
+                character={character}
+              />
             </TinderCard>
           </CardContainer>
         ))}
