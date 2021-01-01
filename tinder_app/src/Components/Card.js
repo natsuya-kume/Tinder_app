@@ -47,8 +47,10 @@ const Card = ({ userData }) => {
   // カードがスワイプされる時の関数　引数はスワイプ方向と消すカードの名前
   const swiped = (direction, nameToDelete) => {
     console.log(nameToDelete + "が消されました");
-    setLastDirection(direction); // スワイプされた方向を格納;
-    alreadySwiped.push(nameToDelete); // alreadySwipedにスワイプされた名前を代入;
+    if (direction === "left" || direction === "right") {
+      setLastDirection(direction); // スワイプされた方向を格納;
+      alreadySwiped.push(nameToDelete); // alreadySwipedにスワイプされた名前を代入;
+    }
   };
 
   // カードが枠から出た時の関数
@@ -103,6 +105,7 @@ const Card = ({ userData }) => {
               key={character.name}
               onSwipe={(dir) => swiped(dir, character.name)}
               onCardLeftScreen={() => outOfFrame(character.name)}
+              preventSwipe="up,down"
             >
               <div
                 style={{ backgroundImage: "url(" + character.image + ")" }}
