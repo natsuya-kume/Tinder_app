@@ -52,6 +52,7 @@ const Profile = (props) => {
           onClick={props.handleExpandClick}
           aria-expanded={props.expanded}
           aria-label="show more"
+          onTouchStart={props.handleExpandClick}
         >
           <ExpandMoreIcon />
         </IconButton>
