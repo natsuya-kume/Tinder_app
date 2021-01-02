@@ -6,7 +6,8 @@ const App = () => {
   // 一番上の階層でuserDataを取得
   const [userData, setUserData] = useState([]);
   useEffect(() => {
-    const url = "http://localhost:3000/users";
+    const url =
+      "https://my-json-server.typicode.com/natsuya-kume/user_data/users";
     fetch(url)
       .then((res) => res.json())
       .then((data) => setUserData(data));
