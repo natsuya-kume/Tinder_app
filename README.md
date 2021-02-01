@@ -1,6 +1,6 @@
 # DEMO
 
-![tinder_app](https://user-images.githubusercontent.com/65702108/106481038-5f136500-64ef-11eb-8405-f36689cc4b31.gif)
+![画面収録 2021-02-02 0 35 07 mov](https://user-images.githubusercontent.com/65702108/106482190-91719200-64f0-11eb-9e33-77730cfaa919.gif)
 
 # Getting Started with Create React App
 
