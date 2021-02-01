@@ -1,3 +1,7 @@
+# DEMO
+
+![tinder_app](https://user-images.githubusercontent.com/65702108/106481038-5f136500-64ef-11eb-8405-f36689cc4b31.gif)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
